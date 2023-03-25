@@ -1,3 +1,5 @@
+using DinnerApp.Application.Services;
+using DinnerApp.Contracts.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DinnerApp.Api.Controllers;
@@ -10,12 +12,12 @@ public class AuthenticationController : ControllerBase
 
     public AuthenticationController(IAuthenticationService authenticationService)
     {
-        authenticationService = authenticationService;
+        _authenticationService = authenticationService;
     }
 
     [HttpPost("register")]
-    public IActionResult Register(RegisterRequest request){
-        
+    public IActionResult Register(RegisterRequest request)
+    {
         var authResult = _authenticationService.Register(
             request.FirstName,
             request.LastName,
@@ -29,12 +31,14 @@ public class AuthenticationController : ControllerBase
             authResult.Email,
             authResult.Token
         );
+
         return Ok(response);
     }
 
     [HttpPost("login")]
-    public IActionResult Register(LoginRequest request){
-    var authResult = _authenticationService.Login(
+    public IActionResult Register(LoginRequest request)
+    {
+        var authResult = _authenticationService.Login(
             request.Email,
             request.Password);
 
@@ -45,6 +49,7 @@ public class AuthenticationController : ControllerBase
             authResult.Email,
             authResult.Token
         );
+
         return Ok(response);
     }
 }

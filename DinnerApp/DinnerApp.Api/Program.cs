@@ -1,3 +1,6 @@
+using DinnerApp.Application;
+using DinnerApp.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
