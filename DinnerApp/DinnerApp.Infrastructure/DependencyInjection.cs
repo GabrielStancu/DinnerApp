@@ -1,5 +1,7 @@
 using DinnerApp.Application.Common.Interfaces.Authentication;
+using DinnerApp.Application.Common.Interfaces.Persistance;
 using DinnerApp.Infrastructure.Authentication;
+using DinnerApp.Infrastructure.Persistance;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,5 +13,6 @@ public static class DependencyInjection
     {
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
+        services.AddScoped<IUserRepository, UserRepository>();
     }
 }
